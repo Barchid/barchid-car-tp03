@@ -46,3 +46,6 @@ Un client en invite de commande interactif est présent à la fin du chargement 
 Deux packages composent l'application
 - **akka** : package principale (où se trouve la classe Main) et qui sert à l'interaction et  au démarrage de l'application avec le client interactif.
 - **akka.actors** : package chargé de la gestion des acteurs, du chargement de leurs configurations initiales ainsi que des messages des acteurs eux-mêmes.
+
+## Gestion d'erreurs
+La spécificité du mode Clustering de Akka permet de ne pas avoir à gérer les erreurs liées à la liaison entre acteurs par le réseau (et donc à ne pas avoir à gerer d'exception). Comme tout est géré du côté du framework, il n'y a aucune gestion d'erreur pour ce projet.
