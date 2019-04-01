@@ -63,9 +63,8 @@ public class NodeActor extends AbstractActor {
 	private Map<ActorRef, Integer> actorNumber;
 
 	/**
-	 * @param number
-	 * @param previousNumbers
-	 * @param nextNumbers
+	 * @param number      the number of the current node actor
+	 * @param nextNumbers the numbers of the child to accept
 	 */
 	public NodeActor(int number, ArrayList<Integer> nextNumbers) {
 		super();
@@ -111,7 +110,7 @@ public class NodeActor extends AbstractActor {
 	 * Callback used when a MemberUp notification has been received by the current
 	 * node. It will send the number of
 	 * 
-	 * @param memberUp
+	 * @param memberUp the memberup notification
 	 */
 	private void onMemberUp(MemberUp memberUp) {
 		this.logger.info("\n\nMember is Up: {}", memberUp.member());

@@ -4,9 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Scanner;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
+import com.typesafe.config.ConfigMergeable;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -20,13 +22,17 @@ import akka.actors.NodeActor;
 public class Main {
 
 	/**
-	 * @param args
-	 * @throws InterruptedException
+	 * @param args the arguments of the main program
+	 * @throws InterruptedException if the akka actors have a problem
 	 */
 	public static void main(String[] args) throws InterruptedException {
-		String propertiesFile = args.length > 0 ? args[0] : null;
+		String propertiesFile = args.length > 0 ? args[0] : "actors-full.properties";
 		Map<Integer, ActorRef> actors = null;
-		if (propertiesFile != null) {
+		System.out.println("Voulez-vous activer le seed-node ? 1 pour 'Oui', autre pour 'Non'");
+		int choix = new Scanner(System.in).nextInt();
+		if (choix == 1) {
+			createSeedNode();
+		} else {
 			try {
 				actors = initClusterNodes(propertiesFile);
 			} catch (Exception e) {
@@ -36,8 +42,7 @@ public class Main {
 			Thread.sleep(10000);
 			UserInteraction interaction = new UserInteraction(actors);
 			interaction.interaction();
-		} else {
-			createSeedNode();
+
 		}
 	}
 
@@ -57,9 +62,9 @@ public class Main {
 	/**
 	 * Initializes the cluster nodes with an Actors builder
 	 * 
-	 * @param propertiesFilename
-	 * @throws FileNotFoundException
-	 * @throws IOException
+	 * @param propertiesFilename the properties filename
+	 * @throws FileNotFoundException if the properties file is not found
+	 * @throws IOException           if the properties file has a problem
 	 * @return a map of ActorRefs depending on their number.
 	 */
 	private static Map<Integer, ActorRef> initClusterNodes(String propertiesFilename)

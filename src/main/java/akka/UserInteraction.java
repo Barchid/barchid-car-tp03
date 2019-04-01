@@ -24,7 +24,7 @@ public class UserInteraction {
 	private Scanner scanner;
 
 	/**
-	 * @param actors
+	 * @param actors the actors of the current jvm
 	 */
 	public UserInteraction(Map<Integer, ActorRef> actors) {
 		super();

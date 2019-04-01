@@ -55,7 +55,7 @@ public interface NodeMessages {
 		public final int number;
 
 		/**
-		 * @param number
+		 * @param number the number of the actor that will stop
 		 */
 		public StopMessage(int number) {
 			super();
@@ -79,8 +79,8 @@ public interface NodeMessages {
 		public final int newChild;
 
 		/**
-		 * @param number
-		 * @param newChild
+		 * @param number   the number of the actor that has to add the newChild
+		 * @param newChild the number of the newChild
 		 */
 		public AddChildNode(int number, int newChild) {
 			super();
@@ -105,8 +105,8 @@ public interface NodeMessages {
 		public final int child;
 
 		/**
-		 * @param number
-		 * @param child
+		 * @param number the number of the actor that has to remove the child
+		 * @param child  the number of the child to be removed
 		 */
 		public RemoveChildNode(int number, int child) {
 			super();

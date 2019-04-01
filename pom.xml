@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>akka-sample-cluster-java</artifactId>
-  <groupId>com.typesafe.akka.samples</groupId>
+  <artifactId>CAR-AKKA-CLUSTER</artifactId>
+  <groupId>car.barchid.tp</groupId>
   <name>Akka Cluster in Java</name>
   <version>1.0</version>
   
@@ -15,6 +15,18 @@
   </properties>
 
   <dependencies>
+  	<dependency>
+       <groupId>com.typesafe.akka</groupId>
+       <artifactId>akka-testkit_2.12</artifactId>
+       <version>${akka.version}</version>
+       <scope>test</scope>
+    </dependency>
+    <dependency>
+       <groupId>junit</groupId>
+       <artifactId>junit</artifactId>
+       <version>4.12</version>
+       <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>com.typesafe.akka</groupId>
       <artifactId>akka-cluster-tools_2.12</artifactId>
@@ -29,19 +41,54 @@
 
   <build>
     <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
+    <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-javadoc-plugin</artifactId>
+		<version>2.10.4</version>
+		<configuration>
+			<reportOutputDirectory>${project.build.directory}/docs</reportOutputDirectory>
+			<destDir>docs</destDir>
+			<nohelp>true</nohelp>
+		</configuration>
+	</plugin>
+     <plugin>
+       <groupId>org.apache.maven.plugins</groupId>
+       <artifactId>maven-compiler-plugin</artifactId>
+       <version>3.1</version>
+       <configuration>
+         <source>1.8</source>
+         <target>1.8</target>
+         <fork>true</fork>
+         <compilerArgs>
+           <arg>-Xlint</arg>
+         </compilerArgs>
+       </configuration>
+     </plugin>
+     <plugin>
+		<groupId>org.apache.maven.plugins</groupId>
+		<artifactId>maven-jar-plugin</artifactId>
+		<version>3.0.2</version>
+		<configuration>
+			<archive>
+				<manifest>
+					<mainClass>akka.Main</mainClass>
+				</manifest>
+			</archive>
+		</configuration>
+	</plugin>
+     <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
         <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-          <fork>true</fork>
-          <compilerArgs>
-            <arg>-Xlint</arg>
-          </compilerArgs>
+            <executable>java</executable>
+            <arguments>
+                <argument>-classpath</argument>
+                <classpath />
+                <argument>akka.Main</argument>
+            </arguments>
         </configuration>
-      </plugin>
+    </plugin>
     </plugins>
   </build>
 </project>
