@@ -38,3 +38,11 @@ Un client en invite de commande interactif est présent à la fin du chargement 
 - Supprimer un lien entre deux noeuds 
 - Ajouter un lien entre deux noeuds 
 - Stopper un noeud
+
+
+## Architecture
+
+### Organisation en packages
+Deux packages composent l'application
+- **akka** : package principale (où se trouve la classe Main) et qui sert à l'interaction et  au démarrage de l'application avec le client interactif.
+- **akka.actors** : package chargé de la gestion des acteurs, du chargement de leurs configurations initiales ainsi que des messages des acteurs eux-mêmes.
